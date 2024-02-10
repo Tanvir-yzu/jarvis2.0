@@ -109,7 +109,7 @@ if __name__ == "__main__":
             speak(weather_info)
 
         elif "open vs" in query:
-            code_path = "C:\\Users\\Lenovo\\AppData\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code.exe"  # Update this with your VSCode path
+            code_path = " "  # Update this with your VSCode path
             os.startfile(code_path)
 
         elif "tanveer" in query:
