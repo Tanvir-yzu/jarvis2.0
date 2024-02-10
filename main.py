@@ -4,6 +4,7 @@ import datetime
 import wikipedia
 import webbrowser
 import os
+import requests
 
 # Initialize the pyttsx3 engine for text-to-speech
 engine = pyttsx3.init("sapi5")
@@ -29,6 +30,26 @@ def wish_me():
     else:
         speak("Good Evening!")
     speak("I am Tanvir 2.0, your personal assistant. How may I assist you?")
+
+
+# Function to fetch the current weather
+def get_weather():
+    url = "https://open-weather13.p.rapidapi.com/city/Yangzhou,%20Jiangsu"
+    headers = {
+        "X-RapidAPI-Key": "b1bd08449amsh47a3ca09da73cedp1a828fjsn5a1506014af8",
+        "X-RapidAPI-Host": "open-weather13.p.rapidapi.com",
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        if "main" in data and "temp" in data["main"] and "weather" in data:
+            temperature = data["main"]["temp"]
+            weather_desc = data["weather"][0]["description"]
+            return f"The current temperature in Yangzhou City,  is {temperature} degrees Celsius with {weather_desc}."
+        else:
+            return "Sorry, weather information is not available."
+    else:
+        return "Sorry, I couldn't fetch the weather information."
 
 
 def take_command():
@@ -80,15 +101,24 @@ if __name__ == "__main__":
         elif "the time" in query:
             str_time = datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"Sir, the time is {str_time}")
+        elif "the date" in query:
+            str_date = datetime.datetime.now().strftime("%A, %B %d, %Y")
+            speak(f"Sir, today's date is {str_date}")
+        elif "weather" in query:
+            weather_info = get_weather()
+            speak(weather_info)
 
         elif "open vs" in query:
-            code_path = (
-                "C:\\Users\\Lenovo\\AppData\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code.exe"  # Update this with your VSCode path
-            )
+            code_path = "C:\\Users\\Lenovo\\AppData\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code.exe"  # Update this with your VSCode path
             os.startfile(code_path)
-        elif "tanveer" in query:
-            speak("I am Tanvir 2.0, your personal assistant. How may I assist you?")  
 
-        elif "exit" in query:
+        elif "tanveer" in query:
+            speak("I am Tanvir 2.0, your personal assistant. How may I assist you?")
+        elif "how are you" in query:
+            speak("I'm doing well, thank you!")
+        elif "hello" in query:
+            speak("Hello! How can I assist you?")
+
+        elif "goodbye" in query or "exit" in query:
             speak("Goodbye Sir!")
             break
