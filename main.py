@@ -117,7 +117,9 @@ if __name__ == "__main__":
         elif "how are you" in query:
             speak("I'm doing well, thank you!")
         elif "hello" in query:
-            speak("Hello! How can I assist you?")
+            speak("Hello sir! How can I assist you?")
+        elif "what is your name" in query:
+            speak("I am Tanvir 2.0, your personal assistant. How may I assist you?")
 
         elif "goodbye" in query or "exit" in query:
             speak("Goodbye Sir!")
