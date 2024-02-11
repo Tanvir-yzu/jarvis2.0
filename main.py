@@ -107,6 +107,8 @@ if __name__ == "__main__":
         elif "weather" in query:
             weather_info = get_weather()
             speak(weather_info)
+            
+            
 
         elif "open vs" in query:
             code_path = " "  # Update this with your VSCode path
