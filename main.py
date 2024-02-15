@@ -1,6 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
 import datetime
+import pywhatkit
 import wikipedia
 import webbrowser
 import os
@@ -30,6 +31,7 @@ def wish_me():
     else:
         speak("Good Evening!")
     speak("I am Tanvir 2.0, your personal assistant. How may I assist you?")
+    
 
 
 # Function to fetch the current weather
@@ -97,6 +99,10 @@ if __name__ == "__main__":
             os.startfile(
                 os.path.join(music_dir, songs[0])
             )  # Play the first song in the directory
+        elif "play" in query: 
+             song = query.replace('play', '')
+             speak('playing ' + song)
+             pywhatkit.playonyt(song)    
 
         elif "the time" in query:
             str_time = datetime.datetime.now().strftime("%H:%M:%S")
@@ -108,8 +114,6 @@ if __name__ == "__main__":
             weather_info = get_weather()
             speak(weather_info)
             
-            
-
         elif "open vs" in query:
             code_path = " "  # Update this with your VSCode path
             os.startfile(code_path)
